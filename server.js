@@ -19,7 +19,7 @@ let jwtOptions = {
 
 let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
 
-    console.log('Payload received', jwt_payload);
+    
     if (jwt_payload) {
         next(null, {
             _id: jwt_payload._id,
@@ -54,9 +54,10 @@ app.post("/api/user/login", (req, res) => {
             userName:user.userName
             
         }
-        let token=jwi.sign(payload,jwtOptions.secretOrKey);
+        let token=jwt.sign(payload,jwtOptions.secretOrKey);
         res.json({ "message": "login successful",token:token});
     }).catch(msg => {
+       
         res.status(422).json({ "message": msg });
     });
 });
@@ -119,7 +120,7 @@ app.delete("/api/user/history/:id", passport.authenticate('jwt',{session:false})
 
 userService.connect()
 .then(() => {
-    app.listen(HTTP_PORT, () => { console.log("API listening on: " + HTTP_PORT) });
+    app.listen(HTTP_PORT, () => { console.log("API listening on: " + HTTP_PORT) },);
 })
 .catch((err) => {
     console.log("unable to start the server: " + err);
