@@ -34,8 +34,8 @@ module.exports.connect = function () {
 
 module.exports.registerUser = function (userData) {
     return new Promise(function (resolve, reject) {
-        console.log(userData);
-
+        
+          console.log(userData.password);
         if (userData.password != userData.password2) {
             reject("Passwords do not match");
         } else {
@@ -62,7 +62,7 @@ module.exports.registerUser = function (userData) {
 
 module.exports.checkUser = function (userData) {
     return new Promise(function (resolve, reject) {
-
+        console.log(userData.password);
         User.findOne({ userName: userData.userName })
             .exec()
             .then(user => {
@@ -75,7 +75,7 @@ module.exports.checkUser = function (userData) {
                 });
             }).catch(err => {
 
-                console.log(err);
+                
                 reject("Unable to find user " + userData.userName);
             });
     });
