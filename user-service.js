@@ -26,7 +26,7 @@ module.exports.connect = function () {
         });
 
         db.once('open', () => {
-            User = db.model("users-web422", userSchema);
+            User = db.model("users", userSchema);
             resolve();
         });
     });
